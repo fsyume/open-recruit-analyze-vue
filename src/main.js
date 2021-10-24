@@ -12,7 +12,7 @@ Vue.config.productionTip = false
 
 Vue.prototype.$http = axios
 
-axios.defaults.baseURL = 'https://ark.fsyume.com:9966'
+axios.defaults.baseURL = 'https://arkapi.fsyume.com:9966'
 
 
 // 自定义标签标题

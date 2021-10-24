@@ -80,7 +80,7 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           // 给后台发送post登录请求
-          this.$http.post("https://ark.fsyume.com:9966/usertoken", this.loginForm).then((res) => {
+          this.$http.post("usertoken", this.loginForm).then((res) => {
             console.log(res.data);
             this.loginForm.token = res.data.token;
             console.log(this.loginForm.token)
