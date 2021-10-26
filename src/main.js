@@ -4,6 +4,7 @@ import router from './router'
 import './plugins/element.js'
 import axios from "axios";
 import * as echarts from 'echarts';
+import '@/assets/css/style.css'
 
 
 Vue.prototype.$echarts = echarts
