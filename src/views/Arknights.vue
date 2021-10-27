@@ -31,12 +31,19 @@
             <br />
             您的用户令牌（token）：{{ loginForm.token }}
             <br />
-            <span style="color: #ff0000"
-              >请注意不要过度重复获取令牌，由于未知原因会出现bug，
-              一个用户令牌目前没有测试多长时间过期，但是实际测试可以用好几天，请保存好您的用户令牌，提示过期后再次申请
-              <h4>
-                由于请求需要间隔0.5s才能再请求(防止服务器封禁)，需要等待几秒才能出结果（5秒内不出结果请按F12调出控制台查看详情）
-              </h4>
+            位于本地缓存的令牌（token）：{{localToken}}
+            <br>
+            <span style="color: #ff0000">
+
+              请注意不要过度重复获取令牌，会触发鹰角服务器的人机验证（若出现请去
+              <el-link type="danger" href="https://ak.hypergryph.com/user/inquiryGacha">鹰角网络-明日方舟官网</el-link>
+              重新登录后在获取）请保存好您的用户令牌，在提示过期后再次申请
+
+              <h3>服务器不会储存任何信息，后台代码已开源，您可以从
+                <el-link type="danger" href="https://ak.hypergryph.com/user/inquiryGacha">鹰角网络-明日方舟官网</el-link>
+                获取您账户的令牌（token）
+              </h3>
+
             </span>
           </el-form-item>
         </el-form>
@@ -65,6 +72,7 @@ export default {
   components: { ArkDataCharts },
   data() {
     return {
+      localToken: localStorage.getItem("token"),
       loginForm: {
         phone: "",
         password: "",
@@ -95,12 +103,15 @@ export default {
             this.loginForm.token = res.data.token;
             console.log(this.loginForm.token);
             if (res.data.static) {
-              // 在sessionStorage储存用户信息
-              sessionStorage.setItem("token", res.data.token);
+              // 在本地缓存储存用户信息
+              localStorage.setItem("token", res.data.token);
               this.$message.success("登录成功");
             } else {
               this.$message.error("登录失败，请检查用户名和密码");
             }
+          }).catch((err) => {
+            this.$message.error(err);
+            console.log(err)
           });
         } else {
           this.$message.error("请将表单填写完整");

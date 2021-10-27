@@ -31,8 +31,6 @@
         </el-table>
       </div>
     </div>
-
-
   </div>
 </template>
 
@@ -72,6 +70,9 @@ export default {
         this.tableData[0].total = fineData.six + fineData.five + fineData.four + fineData.three;
 
         this.myEcharts();
+      }).catch((err) => {
+        this.$message.error(err);
+        console.log(err)
       });
 
     },
