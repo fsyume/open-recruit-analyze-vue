@@ -8,10 +8,7 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    component: Arknights,
-    meta: {
-      title: '明日方舟蛋池模拟'
-    }
+    component: Arknights
   }
 ]
 

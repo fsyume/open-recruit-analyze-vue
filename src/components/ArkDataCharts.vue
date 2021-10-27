@@ -3,13 +3,36 @@
     <el-form label-width="100px" size="medium">
       <el-form-item label="您的用户令牌">
         <el-input
-          v-model="userInfo.token"
-          style="width: 300px; margin-right: 25px"
+            v-model="userInfo.token"
+            style="width: 300px; margin-right: 25px"
         ></el-input>
         <el-button type="primary" @click="inquiry">查询</el-button>
       </el-form-item>
     </el-form>
-    <div id="main" style="width: 600px; height: 400px"></div>
+
+    <div class="box">
+      <div id="main" style="width: 600px; height: 400px"></div>
+
+      <div class="table">
+        <el-table
+            :data="tableData"
+            stripe
+            style="width: 100%">
+          <el-table-column
+              prop="total"
+              label="总次数"
+              width="180">
+          </el-table-column>
+          <el-table-column
+              prop="newP"
+              label="新干员数"
+              width="180">
+          </el-table-column>
+        </el-table>
+      </div>
+    </div>
+
+
   </div>
 </template>
 
@@ -28,6 +51,10 @@ export default {
         _three: 0,
         _isnew: 0,
       },
+      tableData: [{
+        total: 0,
+        newP: 0
+      }]
     };
   },
   methods: {
@@ -41,8 +68,12 @@ export default {
         this.arkData._four = fineData.four;
         this.arkData._three = fineData.three;
 
+        this.tableData[0].newP = fineData.isnew;
+        this.tableData[0].total = fineData.six + fineData.five + fineData.four + fineData.three;
+
         this.myEcharts();
       });
+
     },
     myEcharts() {
       // 基于准备好的dom，初始化echarts实例
@@ -101,10 +132,18 @@ export default {
     },
   },
   mounted() {
-    // this.myEcharts();
   },
 };
 </script>
 
 <style scoped>
+.box{
+  display: flex;
+  justify-content: space-around;
+}
+
+
+.table {
+  width: 365px;
+}
 </style>
