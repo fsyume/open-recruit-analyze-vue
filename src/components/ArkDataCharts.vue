@@ -10,7 +10,7 @@
       </el-form-item>
     </el-form>
 
-    <div class="box">
+    <div class="box" v-loading="loading">
       <div id="main" style="width: 600px; height: 400px"></div>
 
       <div class="table">
@@ -52,11 +52,14 @@ export default {
       tableData: [{
         total: 0,
         newP: 0
-      }]
+      }],
+      loading: null
     };
   },
   methods: {
     inquiry() {
+      this.loading = true;
+
       this.$http.post("arkdata", this.userInfo).then((res) => {
         var fineData = res.data.data;
         console.log(res.data);
@@ -70,9 +73,12 @@ export default {
         this.tableData[0].total = fineData.six + fineData.five + fineData.four + fineData.three;
 
         this.myEcharts();
+
+        this.loading = false;
       }).catch((err) => {
         this.$message.error(err);
         console.log(err)
+        this.loading = false;
       });
 
     },
