@@ -1,12 +1,12 @@
 <template>
   <div>
-    <el-form label-width="100px" size="medium">
-      <el-form-item label="您的用户令牌">
+    <el-form label-width="100px" size="medium" :rules="rules" :model="userInfo" ref="loginForm">
+      <el-form-item label="用户令牌" prop="token">
         <el-input
             v-model="userInfo.token"
             style="width: 300px; margin-right: 25px"
         ></el-input>
-        <el-button type="primary" @click="inquiry">查询</el-button>
+        <el-button type="primary" @click="inquiry('loginForm')">查询</el-button>
       </el-form-item>
     </el-form>
 
@@ -53,41 +53,52 @@ export default {
         total: 0,
         newP: 0
       }],
+      rules: {
+        token: [{required: true, message: "请输入令牌", trigger: "blur"}]
+      },
       loading: null
     };
   },
   methods: {
-    inquiry() {
-      this.loading = true;
+    inquiry(fromName) {
+      this.$refs[fromName].validate((valid) => {
+        console.log(valid)
+        this.loading = true;
+        if (valid) {
+          this.$http.post("arkdata", this.userInfo).then((res) => {
+            const fineData = res.data.data;
+            console.log(res.data);
 
-      this.$http.post("arkdata", this.userInfo).then((res) => {
-        var fineData = res.data.data;
-        console.log(res.data);
+            this.arkData._six = fineData.six;
+            this.arkData._five = fineData.five;
+            this.arkData._four = fineData.four;
+            this.arkData._three = fineData.three;
 
-        this.arkData._six = fineData.six;
-        this.arkData._five = fineData.five;
-        this.arkData._four = fineData.four;
-        this.arkData._three = fineData.three;
+            this.tableData[0].newP = fineData.isnew;
+            this.tableData[0].total = fineData.six + fineData.five + fineData.four + fineData.three;
 
-        this.tableData[0].newP = fineData.isnew;
-        this.tableData[0].total = fineData.six + fineData.five + fineData.four + fineData.three;
+            this.myEcharts();
 
-        this.myEcharts();
+            this.loading = false;
+          }).catch((err) => {
+            this.$message.error(err);
+            console.log(err)
+            this.loading = false;
+          });
 
-        this.loading = false;
-      }).catch((err) => {
-        this.$message.error(err);
-        console.log(err)
-        this.loading = false;
-      });
+        } else {
+          this.$message.error("请填写您的用户令牌");
+          this.loading = false;
+        }
+      })
 
     },
     myEcharts() {
       // 基于准备好的dom，初始化echarts实例
-      var myChart = this.$echarts.init(document.getElementById("main"));
+      const myChart = this.$echarts.init(document.getElementById("main"));
 
       // 指定图表的配置项和数据
-      var option = {
+      const option = {
         title: {
           text: "明日方舟寻坊分析",
           subtext: "by：浮生yume",
@@ -144,7 +155,7 @@ export default {
 </script>
 
 <style scoped>
-.box{
+.box {
   display: flex;
   justify-content: space-around;
 }

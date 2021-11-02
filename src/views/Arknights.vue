@@ -138,7 +138,7 @@ export default {
     },
     // 一键复制
     copy() {
-      var clip = new clipboard('.copy-txt')
+      const clip = new clipboard('.copy-txt');
 
       clip.on('success', e => {
         this.$message.success("复制成功！")
