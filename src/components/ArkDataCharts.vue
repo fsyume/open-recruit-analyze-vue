@@ -113,7 +113,7 @@ export default {
         },
         series: [
           {
-            name: "标准寻访",
+            name: "公开寻访",
             type: "pie",
             radius: "50%",
             data: [
