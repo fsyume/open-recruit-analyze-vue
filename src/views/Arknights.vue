@@ -4,57 +4,12 @@
     <h2>明日方舟Arknights寻访分析</h2>
     <div class="main-box">
       <el-card>
-        <el-form
-            ref="loginForm"
-            :model="loginForm"
-            :rules="rules"
-            label-width="70px"
-            size="medium"
-        >
-          <el-form-item label="手机号" prop="phone">
-            <el-input v-model="loginForm.phone"></el-input>
-          </el-form-item>
+       如何获取明日方舟用户token?
+        <el-link href="https://docs.qq.com/doc/DS3ZldmRIQnJrWExO" target="_blank">👉点我获取教程📄 </el-link>
 
-          <el-form-item label="密码" prop="password">
-            <el-input
-                v-model="loginForm.password"
-                type="password"
-                show-password
-            ></el-input>
-          </el-form-item>
+        <br>
 
-          <el-form-item>
-            <el-button type="primary" @click="submitForm('loginForm')"
-            >登录
-            </el-button
-            >
-            <el-button @click="resetForm('loginForm')">重置</el-button>
-            <br/>
-            <span style="color: red">点击令牌一键复制</span>
-            <br>
-            <span @click="copy" class="copy-txt" :data-clipboard-text="loginForm.token">
-              您的用户令牌（token）：{{ loginForm.token }}
-            </span>
-            <br/>
-            <span @click="copy" class="copy-txt" :data-clipboard-text="localToken">
-            位于本地缓存的令牌（token）：{{ localToken }}
-              </span>
-            <br>
-            <span style="color: #ff0000">
-
-              请注意不要过度重复获取令牌，会触发鹰角服务器的人机验证（若出现请去
-              <el-link type="danger" href="https://ak.hypergryph.com/user/inquiryGacha">鹰角网络-明日方舟官网</el-link>
-              重新登录后在获取）请保存好您的用户令牌，在提示过期后再次申请
-
-              <h3>服务器不会储存任何信息，后台代码已开源，如果您有相关知识，您可以从
-                <el-link type="danger" href="https://ak.hypergryph.com/user/inquiryGacha">鹰角网络-明日方舟官网</el-link>
-                登录API中
-                获取您账户的令牌（token）
-              </h3>
-
-            </span>
-          </el-form-item>
-        </el-form>
+        <span style="color: red;font-size: 20px">本站点服务器不会储存您的任何信息</span>
       </el-card>
     </div>
 
