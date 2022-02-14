@@ -46,7 +46,7 @@
               <el-link type="danger" href="https://ak.hypergryph.com/user/inquiryGacha">鹰角网络-明日方舟官网</el-link>
               重新登录后在获取）请保存好您的用户令牌，在提示过期后再次申请
 
-              <h3>服务器不会储存任何信息，后台代码已开源，如担心不安全，可以去官网清楚其他设备的登录状态</h3>
+              <h3>服务器不会储存任何信息，后台代码已开源，如担心不安全，可以去官网清除其他设备的登录状态</h3>
 
             </span>
           </el-form-item>
