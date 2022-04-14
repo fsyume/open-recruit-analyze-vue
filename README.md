@@ -1,2 +1,2 @@
-# Arknights_OpenSearch_Analyze_Vue
-Arknights_OpenSearch_Analyze前端页面
+# Arknights_OpenRecruit_Analyze_Vue
+Arknights_OpenRecruit_Analyze_Vue前端页面
